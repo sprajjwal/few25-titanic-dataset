@@ -22,7 +22,7 @@
 // Return a number.
 
 function getTotalPassengers(data) {
-	return 0
+	return data.length
 }
 
 // 2 ---------------------------------------------------------------
@@ -31,7 +31,9 @@ function getTotalPassengers(data) {
 // Return a number.
 
 function getSurvivorCount(data) {
-	return 0
+	return data.reduce((acc, passenger ) => {
+		return passenger.fields.survived === "No" ? acc + 0 : acc + 1
+	}, 0)
 }
 
 // 3 ---------------------------------------------------------------
@@ -39,7 +41,9 @@ function getSurvivorCount(data) {
 // Return a number.
 
 function getCasualityCount(data) {
-	return 0
+	return data.reduce((acc, passenger ) => {
+		return passenger.fields.survived === "Yes" ? acc + 0 : acc + 1
+	}, 0) 
 }
 
 // 4 ---------------------------------------------------------------
@@ -49,7 +53,9 @@ function getCasualityCount(data) {
 // Return a number
 
 function countPassengersInClass(data, pclass) {
-	return 0
+	return data.reduce((acc, passenger ) => {
+		return passenger.fields.pclass === pclass ? acc + 1 : acc + 0
+	}, 0)
 }
 
 // 5 ---------------------------------------------------------------
@@ -57,7 +63,9 @@ function countPassengersInClass(data, pclass) {
 // the data and passenger class. Return only passengers  
 
 function getSurvivorCountForClass(data, pclass) {
-	return 0
+	return data.reduce((acc, passenger ) => {
+		return passenger.fields.survived === "Yes" && passenger.fields.pclass === pclass ? acc + 1 : acc + 0
+	}, 0)
 }
 
 // 6 ---------------------------------------------------------------
@@ -66,7 +74,9 @@ function getSurvivorCountForClass(data, pclass) {
 // the number of passengers who did not survive for that class. 
 
 function getCasualityCountForClass(data, pclass) {
-	return 0
+	return data.reduce((acc, passenger ) => {
+		return passenger.fields.survived === "No" && passenger.fields.pclass === pclass ? acc + 1 : acc + 0
+	}, 0)
 }
 
 // 7 ---------------------------------------------------------------
