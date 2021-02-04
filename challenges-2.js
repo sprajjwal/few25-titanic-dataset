@@ -25,7 +25,7 @@
 // Or if property = 'age' -> [40, 26, 22, 28, 23, 45, 21, ...]
 
 function getAllValuesForProperty(data, property) {
-	return []
+	return data.map(p => p.fields[property])
 }
 
 // 2 -------------------------------------------------------------
@@ -34,7 +34,7 @@ function getAllValuesForProperty(data, property) {
 // array of all the male passengers [{...}, {...}, {...}, ...]
 
 function filterByProperty(data, property, value) {
-	return []
+	return data.filter(p => p.fields[property] === value)
 }
 
 // 3 -------------------------------------------------------------
@@ -43,7 +43,7 @@ function filterByProperty(data, property, value) {
 // given property have been removed
 
 function filterNullForProperty(data, property) {
-	return []
+	return data.filter(p => p.fields[property] !== undefined)
 }
 
 // 4 -------------------------------------------------------------
@@ -52,7 +52,7 @@ function filterNullForProperty(data, property) {
 // Return the total of all values for a given property. This
 
 function sumAllProperty(data, property) {
-	return 0
+	return data.reduce((acc, item) => acc = item.fields[property] !== undefined ? acc + item.fields[property] : acc, 0)
 }
 
 
@@ -67,7 +67,14 @@ function sumAllProperty(data, property) {
 // at Cherbourg, 77 emabrked at Queenstown, and 2 are undedfined
 
 function countAllProperty(data, property) {
-	return {}
+	return data.reduce((acc, p) => {
+		if (acc[p.fields[property]] === undefined) {
+			acc[p.fields[property]] = 1
+		} else {
+			acc[p.fields[property]] += 1
+		}
+		return acc
+	}, {})
 }
 
 
@@ -77,7 +84,14 @@ function countAllProperty(data, property) {
 // of items in each bucket.
 
 function makeHistogram(data, property, step) {
-	return []
+	return data.filter(p => p.fields[property] !== undefined).reduce((acc, p) => {
+		if (acc[Math.floor(p.fields[property] / step)] === undefined) {
+			acc[Math.floor(p.fields[property] / step)] = 1
+		} else {
+			acc[Math.floor(p.fields[property] / step)] += 1
+		}
+		return acc 
+	}, [], 0)
 }
 
 // 7 ------------------------------------------------------------
@@ -86,7 +100,9 @@ function makeHistogram(data, property, step) {
 // to divide each value by the maximum value in the array.
 
 function normalizeProperty(data, property) {
-	return []
+	const items = data.filter(p => p.fields[property] !== undefined).map(p => p.fields[property])
+	let max = Math.max(...items)
+	return items.map(p => p / max)
 }
 
 // --------------------------------------------------------------

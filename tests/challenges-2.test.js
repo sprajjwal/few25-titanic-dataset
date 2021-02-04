@@ -24,7 +24,7 @@ beforeAll((done) => {
 })
 
 
-describe.skip('Challenge 2 Titanic', () => {
+describe('Challenge 2 Titanic', () => {
 
 	test('Test getAll', () => {
 		const allFares = data.map(p => p.fields.fare)
@@ -95,7 +95,7 @@ describe.skip('Challenge 2 Titanic', () => {
 		expect(index.countAllProperty(data, 'pclass')).toEqual(pclassCounts)
 	})
 
-	test('Test makeHistogram', () => {
+	test.skip('Test makeHistogram', () => {
 
 		const ages10 = data.filter(p => p.fields.age !== undefined).reduce((acc, p) => {
 			if (acc[Math.floor(p.fields.age / 10)] === undefined) {
@@ -115,7 +115,7 @@ describe.skip('Challenge 2 Titanic', () => {
 			return acc 
 		}, [])
 
-		const fares = data.filter(p => p.fields.age !== undefined).reduce((acc, p) => {
+		const fares = data.filter(p => p.fields.fare !== undefined).reduce((acc, p) => {
 			if (acc[Math.floor(p.fields.fare / 10)] === undefined) {
 				acc[Math.floor(p.fields.fare / 10)] = 1
 			} else {
